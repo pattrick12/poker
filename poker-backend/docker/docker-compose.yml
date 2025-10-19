@@ -1,0 +1,40 @@
+
+
+services:
+  api:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../app:/app/app
+    depends_on:
+      - redis
+      - nats
+      - postgres
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - NATS_URL=nats://nats:4222
+      - DATABASE_URL=postgresql+asyncpg://user:password@postgres/poker
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    command: [ "-js" ]
+
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=poker

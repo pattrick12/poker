@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h1>WebSocket Connection Test</h1>
+    <button onclick="testConnection()">Test Connection</button>
+    <pre id="log"></pre>
+    
+    <script>
+        function log(msg) {
+            document.getElementById('log').textContent += msg + '\n';
+        }
+        
+        function testConnection() {
+            log('Testing WebSocket connection to ws://localhost:8000/ws/Test...');
+            
+            const ws = new WebSocket('ws://localhost:8000/ws/Test');
+            
+            ws.onopen = () => {
+                log('✅ Connected successfully!');
+                
+                // Send a join action
+                const joinMsg = {
+                    type: 'action',
+                    action: 'join',
+                    player_id: 'p-test',
+                    username: 'test',
+                    buyin: 1000,
+                    table_id: 'Test'
+                };
+                log('Sending join: ' + JSON.stringify(joinMsg));
+                ws.send(JSON.stringify(joinMsg));
+            };
+            
+            ws.onmessage = (event) => {
+                log('📨 Received: ' + event.data);
+            };
+            
+            ws.onerror = (error) => {
+                log('❌ Error: ' + error);
+            };
+            
+            ws.onclose = () => {
+                log('🔌 Disconnected');
+            };
+        }
+    </script>
+</body>
+</html>

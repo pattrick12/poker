@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+strawberry-graphql[fastapi]
+redis
+nats-py==2.10.0
+asyncpg
+sqlalchemy>=2.0
+pydantic>=2.0
+prometheus-client
+opentelemetry-api
+opentelemetry-sdk
+pytest
+pytest-asyncio
+treys
+# k6 is external
+# aiokafka (if using Kafka/Redpanda)
