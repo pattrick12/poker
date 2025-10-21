@@ -44,10 +44,6 @@ npm run dev
 - Turn indicator (yellow highlight) shows whose turn it is
 - Action buttons (Fold, Check, Call, Raise) work when it's your turn
 
-**Debugging:**
-- Open browser console (F12) to see WebSocket logs
-- Check backend terminal for action processing logs
-- Verify Docker containers are running: `docker ps`
 
 ## Architecture
 
@@ -57,16 +53,6 @@ npm run dev
 - **Events**: NATS JetStream
 - **Concurrency**: Per-table async queue + Redis locks
 
-## Features Implemented
-
-- ✅ Real-time multiplayer
-- ✅ WebSocket bidirectional communication
-- ✅ Poker FSM (Preflop, Flop, Turn, River, Showdown)
-- ✅ Betting rounds with All-In support
-- ✅ Anti-cheat (Seed Commitment via HMAC)
-- ✅ Persistent game audit logs
-- ✅ User accounts
-- ✅ Animated UI
 
 ## Database Schema
 
